@@ -23,7 +23,7 @@ const ref = {
           top: document.documentElement.offsetHeight,
           behavior: 'smooth'
         })
-                ref.loadMoreBtn.classList.remove('is-hidden');
+          ref.loadMoreBtn.classList.remove('is-hidden');
       })
   },
 
