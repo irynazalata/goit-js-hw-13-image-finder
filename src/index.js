@@ -7,12 +7,27 @@ import './styles.css';
 
 
 ref.form.addEventListener('submit', ref.searchImage);
-ref.loadMoreBtn.addEventListener('click', ref.showMore);
+// Функціонал для кнопки Load More
+// ref.loadMoreBtn.addEventListener('click', ref.showMore);
 
-document.querySelector('.gallery').addEventListener('click', (event) => {
+ref.gallery.addEventListener('click', (event) => {
   basicLightbox.create(`
     <img width="1400" height="900" src="${event.target.dataset['name']}">
-	`).show(() => console.log('lightbox now visible'))
+	`).show()
 })
+
+const loadMore = function () {
+    ref.loading.classList.add('show');
+    ref.showMore();
+	}
+
+window.addEventListener('scroll', () => {
+	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (clientHeight + scrollTop >= scrollHeight) {
+    loadMore();
+  }
+});
+
+
 
 

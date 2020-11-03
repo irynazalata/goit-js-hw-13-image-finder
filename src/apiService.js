@@ -10,35 +10,48 @@ import '@pnotify/core/dist/BrightTheme.css';
 defaultModules.set(PNotifyDesktop, {});
 
 import imageTemplate from '../src/imageTemplate.hbs';
-// import * as InfiniteScroll from 'infinite-scroll';
 
 const ref = {
   TOKEN: '18931614-e34c06c7127746f74346ed387',
   page: 1,
   loadMoreBtn: document.querySelector('.load-btn'),
   form: document.querySelector('#search-form'),
+  gallery: document.querySelector('.gallery'),
+  loading: document.querySelector('.loading'),
 
   searchImage(event) {
     event.preventDefault();
-    ref.loadMoreBtn.classList.add('is-hidden');
+    // Функціонал для кнопки Load More
+    // ref.loadMoreBtn.classList.add('is-hidden');
     ref.page = 1;
-    document.querySelector('.gallery').innerHTML = '';
+    ref.gallery.innerHTML = '';
     ref.renderImages(event.target.query.value);
   },
 
   renderImages(search) {
-    fetch(`https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${search}&page=${ref.page}&per_page=12&key=${ref.TOKEN}`)
+    setTimeout(() => {
+      fetch(`https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${search}&page=${ref.page}&per_page=12&key=${ref.TOKEN}`)
       .then(response => response.json())
       .then(data => {
         if (data.hits.length > 0) {
-          data.hits.forEach(el => document.querySelector('.gallery').insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
-          ref.loadMoreBtn.classList.remove('is-hidden')
+          // Функціонал для кнопки Load More
+          // ref.loadMoreBtn.classList.remove('is-hidden')
+          ref.loading.classList.remove('show');
+          data.hits.forEach(el => ref.gallery.insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
         } else error('Such images are not found')
-        window.scrollTo({
-          top: document.documentElement.offsetHeight,
+        // Функціонал для кнопки Load More
+        //  window.scrollTo({
+        //   top: document.documentElement.offsetHeight,
+        //   behavior: 'smooth'
+        // })
+        
+        const { scrollTop, clientHeight } = document.documentElement;
+          window.scrollTo({
+          top: (scrollTop + clientHeight),
           behavior: 'smooth'
         })
       })
+    }, 100);
   },
 
   showMore() {
@@ -46,12 +59,5 @@ const ref = {
     ref.renderImages(ref.form.query.value);
   },
 }
-
-// const elem = document.querySelector('.gallery');
-// const infScroll = new InfiniteScroll(elem, {
-//   path: ,
-//   append: '.photo-card',
-// // outlayer: instance,
-// });
 
 export default ref
