@@ -45,7 +45,7 @@ const ref = {
               behavior: 'smooth'
             })
           }
-        } else error('Such images are not found')
+          } else error({ delay: 3500, text: 'Such images are not found' })
         // Функціонал для кнопки Load More
         //  window.scrollTo({
         //   top: document.documentElement.offsetHeight,
