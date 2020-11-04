@@ -33,7 +33,7 @@ const ref = {
           if (data.hits.length > 0) {
           // Функціонал для кнопки Load More
           // ref.loadMoreBtn.classList.remove('is-hidden')
-          data.hits.forEach(el => ref.gallery.insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
+            data.hits.forEach(el => ref.gallery.insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
           if (ref.gallery.children.length > 12) {
             const { scrollTop, clientHeight } = document.documentElement;
               window.scrollTo({
@@ -41,7 +41,9 @@ const ref = {
               behavior: 'smooth'
             })
           }
-          } else error({ delay: 3500, text: 'Such images are not found' })
+          }else if (data.totalHits === ref.gallery.children.length) {
+            error({ delay: 3500, text: 'No more images in this category' })
+           } else error({ delay: 3500, text: 'Such images are not found' })
         // Функціонал для кнопки Load More
         //  window.scrollTo({
         //   top: document.documentElement.offsetHeight,
