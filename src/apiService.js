@@ -34,22 +34,23 @@ const ref = {
       .then(response => response.json())
         .then(data => {
         ref.loading.classList.remove('show');
-        if (data.hits.length > 0) {
+          if (data.hits.length > 0) {
           // Функціонал для кнопки Load More
           // ref.loadMoreBtn.classList.remove('is-hidden')
           data.hits.forEach(el => ref.gallery.insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
+          if (ref.gallery.children.length > 12) {
+            const { scrollTop, clientHeight } = document.documentElement;
+              window.scrollTo({
+              top: (scrollTop + clientHeight),
+              behavior: 'smooth'
+            })
+          }
         } else error('Such images are not found')
         // Функціонал для кнопки Load More
         //  window.scrollTo({
         //   top: document.documentElement.offsetHeight,
         //   behavior: 'smooth'
         // })
-        
-        const { scrollTop, clientHeight } = document.documentElement;
-          window.scrollTo({
-          top: (scrollTop + clientHeight),
-          behavior: 'smooth'
-        })
       })
     }, 100);
   },
