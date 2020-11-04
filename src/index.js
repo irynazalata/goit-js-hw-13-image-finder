@@ -16,17 +16,18 @@ ref.gallery.addEventListener('click', (event) => {
 	`).show()
 })
 
-const loadMore = function () {
-    ref.loading.classList.add('show');
-    ref.showMore();
-	}
+// Функціонал для scroll
+// const loadMore = function () {
+//     ref.loading.classList.add('show');
+//     ref.showMore();
+// 	}
 
-window.addEventListener('scroll', () => {
-	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (clientHeight + scrollTop >= scrollHeight) {
-    loadMore();
-  }
-});
+// window.addEventListener('scroll', () => {
+// 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+//   if (clientHeight + scrollTop >= scrollHeight) {
+//     loadMore();
+//   }
+// });
 
 
 
