@@ -32,11 +32,11 @@ const ref = {
     setTimeout(() => {
       fetch(`https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${search}&page=${ref.page}&per_page=12&key=${ref.TOKEN}`)
       .then(response => response.json())
-      .then(data => {
+        .then(data => {
+        ref.loading.classList.remove('show');
         if (data.hits.length > 0) {
           // Функціонал для кнопки Load More
           // ref.loadMoreBtn.classList.remove('is-hidden')
-          ref.loading.classList.remove('show');
           data.hits.forEach(el => ref.gallery.insertAdjacentHTML('beforeend', `${imageTemplate(el)}`));
         } else error('Such images are not found')
         // Функціонал для кнопки Load More
