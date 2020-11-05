@@ -31,4 +31,3 @@ ref.gallery.addEventListener('click', (event) => {
 
 
 
-

@@ -84,7 +84,11 @@ infScroll.on('load', function (response) {
       top: (scrollTop + clientHeight),
       behavior: 'smooth'
     })
-    ref.loading.classList.remove('show');
+  ref.loading.classList.remove('show');
+  if (data.total % 12 === this.loadCount) {
+    error({ delay: 3500, text: 'No more images in this category' })
+    infScroll.off
+  }
 })
 
 export default ref
